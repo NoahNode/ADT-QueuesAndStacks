@@ -62,7 +62,28 @@ string infix2postfix(string infix) {
 // Post-Condition: return true if expr contains matching brackets otherwise false
 bool bracketCheck(string expr) {
 	// complete this function 
-	return true;
+	Stack<char> s(expr.length());
+
+	for (int i = 0; i < expr.length(); i++) {
+		if (expr[i] == '{' || expr[i] == '(' || expr[i] == '[') {
+			s.push(expr[i]);
+		}
+	}
+
+	for (int i = 0; i < expr.length(); i++) {
+		if (expr[i] == '}' || expr[i] == ')' || expr[i] == ']') {
+			if (s.top() == expr[i]) {
+				s.pop();
+			}
+		}
+	}
+
+	if (s.isEmpty()) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 // Pre-Condition: infix is a valid expression containing single digit numbers
@@ -81,11 +102,10 @@ bool isPalindrome(string str) {
 	Stack<char> s(str.length());
 	Queue<char> q(str.length());
 
-	for each (char character in str)
-	{
-		if (isalpha(character)) {
-			s.push(tolower(character));
-			q.enqueue(tolower(character));
+	for (int i = 0; i < str.length(); i++) {
+		if (isalpha(str[i])) {
+			s.push(tolower(str[i]));
+			q.enqueue(tolower(str[i]));
 		}
 	}
 	bool same = true;
@@ -133,11 +153,11 @@ void testPalindromeChecker() {
 	string input = "";
 
 	while (input != "quit") {
-		cout << "Please input a word to check if it is a palindrome" << endl;
+		cout << "Please input a word to check if it is a palindrome"  << endl;
 		cin >> input;
 
 		if (isPalindrome(input)) {
-			cout << "This word is a palindrome" << endl;
+			cout << "This word is a palindrome \n" << endl;
 		}
 	}
 
